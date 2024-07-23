@@ -1,0 +1,31 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@iconify-json/ph": "^1.1.13",
+    "@nuxt/eslint": "^0.3.13",
+    "@nuxt/ui": "^2.17.0",
+    "nuxt": "^3.12.3",
+    "sass": "^1.77.6",
+    "signature_pad": "^5.0.2",
+    "vue": "latest"
+  },
+  "devDependencies": {
+    "@google/generative-ai": "^0.13.0",
+    "@nuxt/eslint-config": "^0.3.13",
+    "@vueuse/core": "^10.11.0",
+    "@vueuse/nuxt": "^10.11.0",
+    "eslint": "^9.5.0",
+    "vue-tsc": "^2.0.22"
+  }
+}
