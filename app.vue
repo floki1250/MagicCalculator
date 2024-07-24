@@ -9,7 +9,7 @@
       <div class="flex justify-between items-center h-12">
         <div class="rounded-full">
           <NuxtLink to="/" class="text-3xl font-bold">
-            <img src="/logo.svg" class="w-12 h-12" />
+            <img src="/magicCalc.svg" class="w-12 h-12" />
           </NuxtLink>
         </div>
 
@@ -88,11 +88,7 @@
     <UNotifications />
   </div>
 </template>
-<script setup lang="ts">
-import { useMouse } from '@vueuse/core'
 
-const { x, y, sourceType } = useMouse()
-</script>
 <style scoped>
 .blur-blob {
   filter: blur(40px);
