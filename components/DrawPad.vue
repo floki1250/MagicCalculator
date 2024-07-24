@@ -1,25 +1,14 @@
 <template>
-    <div class="shadow-md rounded-md border border-gray-50 bg-white/80 backdrop-blur-lg">
-        <canvas ref="canvas" />
-        <div class="flex justify-between">
-
-            <div class="flex items-center">
-                <UTooltip text="Undo" :shortcuts="[metaSymbol, 'z']">
-                    <UButton variant="ghost" color="gray" label="Undo" icon="i-ph-arrow-arc-left-duotone"
-                        @click="undo" />
-                </UTooltip>
-                <UTooltip text="Clear" :shortcuts="[metaSymbol, 'k']">
-                    <UButton variant="ghost" color="red" icon="i-ph-x-circle-duotone" label="Clear" @click="clear" />
-                </UTooltip>
-                <UTooltip text="Solve" :shortcuts="[metaSymbol, 's']">
-                    <UButton variant="ghost" color="blue" icon="i-ph-check-circle-duotone" :disabled="!canPost"
-                        :loading="saving" @click="save" label="Solve" />
-                </UTooltip>
-                <UButton @click="drawText" label="Text" />
-                <p>Last Draw Position: {{ lastPosition }}</p>
+    <div>
+        <div class="flex items-center justify-end  backdrop-blur-lg">
+            <div>
+                <UButton variant="ghost" color="gray" label="Undo" icon="i-ph-arrow-arc-left-duotone" @click="undo" />
+                <UButton variant="ghost" color="red" icon="i-ph-x-circle-duotone" label="Clear" @click="clear" />
+                <UButton variant="ghost" color="blue" icon="i-ph-check-circle-duotone" :disabled="!canPost"
+                    :loading="saving" @click="save" label="Solve" />
             </div>
         </div>
-
+        <canvas ref="canvas" />
     </div>
 </template>
 <!-- eslint-disable @stylistic/indent -->
@@ -107,31 +96,31 @@ function undo () {
 async function save () {
     if (!signaturePad.value || signaturePad.value.isEmpty() || props.saving) return;
     const dataURL = signaturePad.value.toDataURL(props.saveType);
-    console.log(dataURL);
     const datares = await $fetch("/api/ai", {
         method: "POST",
         body: {
             img: dataURL
         }
     });
+    if (datares !== null) {
+        drawText(datares.toString());
+    }
     console.log(datares)
     emit("save", dataURL);
 }
-const drawText = () => {
+const drawText = (text: string) => {
     if (signaturePad && canvas.value) {
         const context = canvas.value.getContext('2d');
         if (context) {
-
-
-
+            signaturePad.value.clear();
             // Set text styles
-            context.font = '30px Caveat';
+            context.font = '20px Caveat';
             context.fillStyle = 'black';
             context.textAlign = 'center';
             context.textBaseline = 'middle';
 
             // Draw the text
-            context.fillText("Hello", lastPosition.value?.x + 50, lastPosition.value?.y);
+            context.fillText(text, lastPosition.value?.x + 50, lastPosition.value?.y);
         }
     }
 };
