@@ -19,13 +19,13 @@
               ? ($colorMode.preference = 'dark')
               : ($colorMode.preference = 'light')
             ">
-            <UIcon class="text-2xl hover:text-indigo-500" :name="$colorMode.preference == 'light'
+            <UIcon class="text-2xl hover:text-amber-500" :name="$colorMode.preference == 'light'
               ? 'i-heroicons-sun'
               : 'i-heroicons-moon'
               " />
           </div>
           <div>
-            <NuxtLink to="https://www.buymeacoffee.com/AdamDardour" class="text-2xl hover:text-[#ca98ca]"
+            <NuxtLink to="https://www.buymeacoffee.com/AdamDardour" class="text-2xl hover:text-rose-500"
               target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -51,7 +51,7 @@
             </NuxtLink>
           </div>
           <div>
-            <NuxtLink to="https://github.com/floki1250" class="text-2xl hover:text-indigo-500" target="_blank">
+            <NuxtLink to="https://github.com/floki1250" class="text-2xl hover:text-amber-500" target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <mask id="lineMdGithubLoop0" width="24" height="24" x="0" y="0">
                   <g fill="#fff">
