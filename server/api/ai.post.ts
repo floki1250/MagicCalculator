@@ -31,10 +31,7 @@ export default defineEventHandler(async (event) => {
         },
       },
     ]);
-
-    const res = result.response;
-    console.log(result.response.text());
-    return res.text();
+    return result.response.text();
   } catch (error) {
     console.error("Error generating JSON:", error);
     throw error;

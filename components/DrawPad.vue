@@ -2,10 +2,10 @@
     <div>
         <div class="flex items-center justify-end  backdrop-blur-lg">
             <div>
-                <UButton variant="ghost" color="gray" label="Undo" icon="i-ph-arrow-arc-left-duotone" @click="undo" />
-                <UButton variant="ghost" color="red" icon="i-ph-x-circle-duotone" label="Clear" @click="clear" />
+                <UButton variant="ghost" color="gray" label="Undo" icon="i-ph-arrow-arc-left-duotone" @click="undo()" />
+                <UButton variant="ghost" color="red" icon="i-ph-x-circle-duotone" label="Clear" @click="clear()" />
                 <UButton variant="ghost" color="blue" icon="i-ph-check-circle-duotone" :disabled="!canPost"
-                    :loading="saving" @click="save" label="Solve" />
+                    :loading="saving" @click="save()" label="Solve" />
             </div>
         </div>
         <canvas ref="canvas" />
@@ -68,6 +68,26 @@ onBeforeUnmount(() => {
     window.removeEventListener("resize", resizeCanvas);
     signaturePad.value?.off();
 });
+const wrapText = (context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) => {
+    const words = text.split(' ');
+    let line = '';
+    let testLine = '';
+    let testWidth;
+
+    for (let n = 0; n < words.length; n++) {
+        testLine += words[n] + ' ';
+        testWidth = context.measureText(testLine).width;
+        if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+            testLine = line;
+        } else {
+            line = testLine;
+        }
+    }
+    context.fillText(line, x, y);
+};
 
 function resizeCanvas () {
     const ratio = Math.max(window.devicePixelRatio || 1, 1);
@@ -114,13 +134,20 @@ const drawText = (text: string) => {
         if (context) {
             signaturePad.value.clear();
             // Set text styles
-            context.font = '20px Caveat';
+            context.font = '25px Caveat';
             context.fillStyle = 'black';
             context.textAlign = 'center';
             context.textBaseline = 'middle';
 
-            // Draw the text
-            context.fillText(text, lastPosition.value?.x + 50, lastPosition.value?.y);
+            // Calculate the maximum width and line height
+            const maxWidth = canvas.value.width - 40; // 20px padding on each side
+            const lineHeight = 40; // Adjust as needed
+
+            // Calculate initial y position
+            const x = canvas.value.width / 2;
+            let y = canvas.value.height / 2;
+            // Split text into lines and draw each line
+            wrapText(context, text, x, y, maxWidth, lineHeight);
         }
     }
 };

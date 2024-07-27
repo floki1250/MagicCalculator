@@ -21,7 +21,7 @@ export default {
             previous: null,
             history: [],
             buttons: [
-                '(', ')', 'mc', 'm+', 'm-', 'mr', 'AC', 'Undo', '%', '÷',
+                '(', ')', 'mc', 'm+', 'm-', 'mr', 'AC', '↩', '%', '÷',
                 '2nd', 'x²', 'x³', 'xʸ', 'eˣ', '10ˣ', '7', '8', '9', '×',
                 '1/x', '²√x', '³√x', 'ʸ√x', 'ln', 'log₁₀', '4', '5', '6', '−',
                 'x!', 'sin', 'cos', 'tan', 'e', 'EE', '1', '2', '3', '+',
@@ -36,7 +36,7 @@ export default {
                 this.handleNumber(button);
             } else if (button === 'AC') {
                 this.clear();
-            } else if (button === 'Undo') {
+            } else if (button === '↩') {
                 this.undo();
             } else if (button === '=') {
                 this.calculate();
@@ -198,7 +198,7 @@ export default {
                 return 'text-orange-500 ';
             } else if (!isNaN(button) || button === '.') {
                 return 'text-gray-500';
-            } else if (['(', ')', 'mc', 'm+', 'm-', 'mr', 'AC', 'Undo', '%'].includes(button)) {
+            } else if (['(', ')', 'mc', 'm+', 'm-', 'mr', 'AC', '↩', '%'].includes(button)) {
                 return 'text-blue-500 ';
             } else {
                 return 'text-rose-600';
