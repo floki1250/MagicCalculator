@@ -14,7 +14,7 @@
 <!-- eslint-disable @stylistic/indent -->
 <script setup lang="ts">
 import SignaturePad from "signature_pad";
-
+const text = ref<string>('');
 const props = defineProps({
     saveLabel: {
         type: String,
@@ -63,6 +63,8 @@ onMounted(() => {
             }
         }
     });
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 });
 onBeforeUnmount(() => {
     window.removeEventListener("resize", resizeCanvas);
@@ -90,11 +92,23 @@ const wrapText = (context: CanvasRenderingContext2D, text: string, x: number, y:
 };
 
 function resizeCanvas () {
-    const ratio = Math.max(window.devicePixelRatio || 1, 1);
-    canvas.value.width = canvas.value.offsetWidth * ratio;
-    canvas.value.height = canvas.value.offsetHeight * ratio;
-    canvas.value.getContext("2d").scale(ratio, ratio);
-    signaturePad.value.fromData(signaturePad.value.toData());
+    if (canvas.value) {
+        // Get the pixel ratio
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        // Set the canvas width and height to match the parent element
+        const parentWidth = canvas.value.parentElement?.offsetWidth || 500;
+        const parentHeight = canvas.value.parentElement?.offsetHeight || 500;
+        canvas.value.width = parentWidth * ratio;
+        canvas.value.height = parentHeight * ratio;
+        canvas.value.style.width = `${parentWidth}px`;
+        canvas.value.style.height = `${parentHeight}px`;
+        // Scale the context to match the pixel ratio
+        const context = canvas.value.getContext('2d');
+        if (context) {
+            context.scale(ratio, ratio);
+        }
+        drawText("hello");
+    }
 }
 
 function clear () {
@@ -126,8 +140,11 @@ async function save () {
         drawText(datares.toString());
     }
     console.log(datares)
+
     emit("save", dataURL);
 }
+
+
 const drawText = (text: string) => {
     if (signaturePad && canvas.value) {
         const context = canvas.value.getContext('2d');
@@ -140,17 +157,18 @@ const drawText = (text: string) => {
             context.textBaseline = 'middle';
 
             // Calculate the maximum width and line height
-            const maxWidth = canvas.value.width - 40; // 20px padding on each side
+            const maxWidth = canvas.value.width / (window.devicePixelRatio || 1) - 40;
             const lineHeight = 40; // Adjust as needed
 
             // Calculate initial y position
-            const x = canvas.value.width / 2;
-            let y = canvas.value.height / 2;
+            const x = (canvas.value.width / (window.devicePixelRatio || 1)) / 2;
+            const y = (canvas.value.height / (window.devicePixelRatio || 1)) / 2;
             // Split text into lines and draw each line
             wrapText(context, text, x, y, maxWidth, lineHeight);
         }
     }
 };
+watch(text, drawText);
 </script>
 <style scoped>
 canvas {
