@@ -1,10 +1,6 @@
 <template>
     <div class="flex justify-center items-center">
         <div class="flex flex-col">
-
-            <!-- Menu Section -->
-
-
             <!-- Display Section -->
             <section class="flex flex-col mb-2">
                 <div class="text-gray-600 text-right text-sm mb-1" id="history-display">{{ history }}</div>

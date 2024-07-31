@@ -1,6 +1,6 @@
 <template>
-    <div class="flex justify-center items-center h-screen">
-        <div class="bg-white/50 shadow-lg rounded-lg p-4 ">
+    <div class="flex justify-center p-1 h-screen">
+        <div class="bg-white/50 shadow-lg rounded-lg p-4 border border-gray-100 ">
             <section class="flex items-center mb-2">
                 <button class="px-4 py-2 mr-4 hover:bg-white rounded" @click="switchMode()">
                     <UIcon name="i-ph-list" />

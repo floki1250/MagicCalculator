@@ -172,8 +172,8 @@ watch(text, drawText);
 </script>
 <style scoped>
 canvas {
-    min-width: 400px;
-    min-height: 300px;
+    min-width: 20rem;
+    min-height: 20rem;
     width: 100%;
     height: auto;
     cursor: crosshair;
