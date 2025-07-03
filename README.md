@@ -1,75 +1,21 @@
-# Nuxt 3 Minimal Starter
+# MagicCalculator 🧮✨
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+**MagicCalculator** is an AI-powered calculator inspired by Apple's modern calculator design. It introduces a new way of interacting with math: simply **draw your equation**, and MagicCalculator solves it for you using intelligent handwriting recognition and equation parsing.
 
-## Setup
+---
 
-Make sure to install the dependencies:
+## ✨ Features
+
+- 🖊️ **Draw-to-solve**: Write equations directly on the screen
+- 🧠 **AI Recognition**: Converts handwritten math into digital form
+- ⚙️ **Real-time results**: Instant equation solving as you write
+- 🎨 **Sleek UI**: Clean and elegant interface inspired by Apple’s calculator app
+
+
+## 📦 Installation
 
 ```bash
-# npm
+git clone https://github.com/floki1250/MagicCalculator.git
+cd MagicCalculator
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
